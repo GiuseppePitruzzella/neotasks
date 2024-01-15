@@ -1,0 +1,43 @@
+services:
+  # NextJS Service
+  # nextapp:
+  #   container_name: nextapp
+  #   image: nextapp:1.0.0
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: next.dockerfile
+  #   ports:
+  #     - 3000:3000
+  #   environment:
+  #     - NEXT_PUBLIC_API_URL=http://localhost:4000
+  #   depends_on:
+  #     - flaskapp
+  # # Flask Service
+  flask:
+    container_name: flask
+    image: flask:1.0.0
+    build:
+      # I'll use a Dockerfile in ./backend path
+      context: ./BE
+      dockerfile: flask.dockerfile
+    ports:
+      - 4000:4000
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@database:5432/postgres
+    depends_on:
+      - database
+  # DB Service
+  database:
+    container_name: database
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB:
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata: {}
