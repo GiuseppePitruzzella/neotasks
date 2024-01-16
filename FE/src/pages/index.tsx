@@ -1,10 +1,10 @@
 import React from "react";
-import LoginInterface from "./components/LoginInterface";
+import UserInterface from "./components/UserInterface";
 
 const Home: React.FC = () => {
   return (
     <div>
-      <LoginInterface />
+      <UserInterface backendName="flask" />
     </div>
   );
 }
