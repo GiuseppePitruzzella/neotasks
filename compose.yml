@@ -23,12 +23,12 @@ services:
     ports:
       - 4000:4000
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@database:5432/postgres
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/postgres
     depends_on:
-      - database
+      - db
   # DB Service
-  database:
-    container_name: database
+  db:
+    container_name: db
     image: postgres:13
     environment:
       POSTGRES_USER: postgres

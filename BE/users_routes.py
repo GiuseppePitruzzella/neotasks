@@ -7,11 +7,6 @@ from flask_cors import CORS
 
 from os import environ
 
-# Create a test route
-@app.route('/test', methods=['GET'])
-def test():
-    return jsonify({'message' : 'Server is running!'})
-
 @app.route('/api/flask/users', methods=['POST']) # Create a new User
 def create_user():
     try:

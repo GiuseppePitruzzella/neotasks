@@ -31,47 +31,39 @@ def get_projects():
         return jsonify(projects_data), 200
     except Exception as e:
         return make_response(jsonify({'message' : 'Error getting all Projects : ', 'error' : str(e)}), 500)
-    
 
+@app.route('/api/flask/projects/<id>', methods=['GET']) # Get all Projects
+def get_project(id):
+    try:
+        project = Project.query.filter_by(id = id).first() # Get Project by its ID
+        if project:
+            return make_response(jsonify({'project' : project.json()}), 200)
+        return make_response(jsonify({'message' : 'Project not found!'}), 404)
+    except Exception as e:
+        return make_response(jsonify({'message' : 'Error creating new Project : ', 'error' : str(e)}), 500)
 
+@app.route('/api/flask/projects/<id>', methods=['PUT']) # Get all Projects
+def update_project(id):
+    try:
+        project = Project.query.filter_by(id = id).first() # Get Project by its ID
+        if project:
+            data = request.get_json()
+            project.name = data['name']
+            project.description = data['description']
+            db.session.commit()
+            return make_response(jsonify({'message' : 'Project updated!'}), 200)
+        return make_response(jsonify({'message' : 'Project not found!'}), 404)
+    except Exception as e:
+        return make_response(jsonify({'message' : 'Error creating new Project : ', 'error' : str(e)}), 500)
 
-
-
-
-
-# @app.route('/api/flask/projects/<id>', methods=['GET']) # Get all Projects
-# def get_project(id):
-#     try:
-#         project = Project.query.filter_by(id = id).first() # Get Project by its ID
-#         if project:
-#             return make_response(jsonify({'project' : project.json()}), 200)
-#         return make_response(jsonify({'message' : 'Project not found!'}), 404)
-#     except Exception as e:
-#         return make_response(jsonify({'message' : 'Error creating new Project : ', 'error' : str(e)}), 500)
-
-# @app.route('/api/flask/projects/<id>', methods=['PUT']) # Get all Projects
-# def update_project(id):
-#     try:
-#         project = Project.query.filter_by(id = id).first() # Get Project by its ID
-#         if project:
-#             data = request.get_json()
-#             project.name = data['name']
-#             project.email = data['email']
-#             project.job = data['job']
-#             db.session.commit()
-#             return make_response(jsonify({'message' : 'Project updated!'}), 200)
-#         return make_response(jsonify({'message' : 'Project not found!'}), 404)
-#     except Exception as e:
-#         return make_response(jsonify({'message' : 'Error creating new Project : ', 'error' : str(e)}), 500)
-
-# @app.route('/api/flask/projects/<id>', methods=['DELETE']) # Get all Projects
-# def delete_project(id):
-#     try:
-#         project = Project.query.filter_by(id = id).first() # Get Project by its ID
-#         if project:
-#             db.session.delete(project)
-#             db.session.commit()
-#             return make_response(jsonify({'message' : 'Project deleted!'}), 200)
-#         return make_response(jsonify({'message' : 'Project not found!'}), 404)
-#     except Exception as e:
-#         return make_response(jsonify({'message' : 'Error creating new Project : ', 'error' : str(e)}), 500)
+@app.route('/api/flask/projects/<id>', methods=['DELETE']) # Get all Projects
+def delete_project(id):
+    try:
+        project = Project.query.filter_by(id = id).first() # Get Project by its ID
+        if project:
+            db.session.delete(project)
+            db.session.commit()
+            return make_response(jsonify({'message' : 'Project deleted!'}), 200)
+        return make_response(jsonify({'message' : 'Project not found!'}), 404)
+    except Exception as e:
+        return make_response(jsonify({'message' : 'Error creating new Project : ', 'error' : str(e)}), 500)

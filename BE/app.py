@@ -31,12 +31,13 @@ class Task(db.Model):
     __tablename__ = 'tasks'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), unique=True, nullable=False)
+    description = db.Column(db.String(240), unique=True, nullable=False)
     type = db.Column(db.Integer, unique=False, nullable=False)
     id_project = db.Column(db.Integer, db.ForeignKey('projects.id'))
 
     def json(self):
-        return { 'id' : self.id, 'name' : self.name, 'type' : self.email, 'id_project' : self.id_project }
+        return { 'id' : self.id, 'name' : self.name, 'description' : self.description, 'type' : self.type, 'id_project' : self.id_project }
 
 db.create_all()
 
-import users_routes, project_routes
+import users_routes, project_routes, task_routes
