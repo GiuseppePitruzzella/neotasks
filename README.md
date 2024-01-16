@@ -23,7 +23,7 @@
     <img src="/FE/public/logo.jpg" alt="Logo" width="250" height="250">
   </a>
 
-<h3 align="center">Pepper Gateway</h3>
+<h3 align="center">Neotasks</h3>
 
   <p align="center">
 Neotasks, a user-friendly fullstack app, simplifies tasks tracking for projects with a sleek neomorphic design for efficient work and project management. Gain insights into your daily routines and boost productivity with customizable timers and detailed reports.
@@ -36,9 +36,6 @@ Neotasks, a user-friendly fullstack app, simplifies tasks tracking for projects 
     <a href="https://github.com/GiuseppePitruzzella/neotasks/issues">Request Feature</a>
   </p>
 </div>
-
-#### Built With
-`Python 2.7`
 
 
 
