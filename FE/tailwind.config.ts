@@ -15,6 +15,7 @@ const config: Config = {
       },
       boxShadow: {
         'neo': '10px 10px 15px #d9d9d9, -10px -10px 15px #f0f0f0',
+        'inner-neo': 'inset 5px 5px 10px #d9d9d9, inset -5px -5px 10px #f0f0f0',
       },
     },
   },
