@@ -23,9 +23,10 @@ class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), unique=True, nullable=False)
     description = db.Column(db.String(240), unique=True, nullable=False)
+    id_user = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def json(self):
-        return { 'id' : self.id, 'name' : self.name, 'description' : self.description }
+        return { 'id' : self.id, 'name' : self.name, 'description' : self.description, 'id_project' : self.id_project }
     
 class Task(db.Model):
     __tablename__ = 'tasks'

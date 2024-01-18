@@ -11,14 +11,15 @@ from os import environ
 def create_project():
     try:
         data = request.get_json() # Get data from request
-        new_project = Project(name = data['name'], description = data['description']) # Create new project using Project model
+        new_project = Project(name = data['name'], description = data['description'], id_user = data['id_user']) # Create new project using Project model
         db.session.add(new_project) # Add new project using SQLAlchemy
         db.session.commit() # Commit this session
 
         return jsonify({ # Return the new obj itself to handle ID
             'id' : new_project.id,
             'name' : new_project.name,
-            'description' : new_project.description
+            'description' : new_project.description,
+            'id_user' : new_project.id_user
         }), 201 # HTTP Code
     except Exception as e:
         return make_response(jsonify({'message' : 'Error creating new Project : ', 'error' : str(e)}), 500)
@@ -27,7 +28,7 @@ def create_project():
 def get_projects():
     try:
         projects = Project.query.all() # Get all Projects from table
-        projects_data = [{ 'id' : project.id, 'name' : project.name, 'description' : project.description } for project in projects]
+        projects_data = [{ 'id' : project.id, 'name' : project.name, 'description' : project.description, 'id_user' : project.id_user } for project in projects]
         return jsonify(projects_data), 200
     except Exception as e:
         return make_response(jsonify({'message' : 'Error getting all Projects : ', 'error' : str(e)}), 500)
@@ -50,6 +51,7 @@ def update_project(id):
             data = request.get_json()
             project.name = data['name']
             project.description = data['description']
+            project.id_user = data['id_user']
             db.session.commit()
             return make_response(jsonify({'message' : 'Project updated!'}), 200)
         return make_response(jsonify({'message' : 'Project not found!'}), 404)
