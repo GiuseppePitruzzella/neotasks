@@ -4,6 +4,7 @@ import CardComponent from "./CardComponent";
 import Caption from "./Caption";
 
 import Link from 'next/link'
+import { useRouter } from "next/router";
 
 interface User {
     id: number;
@@ -17,6 +18,7 @@ interface UserInterfaceProps {
 }
 
 const UserInterface: React.FC<UserInterfaceProps> = ({ backendName }) => {
+    const router = useRouter();
     // API Url
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
     // Handle states of Users
@@ -124,8 +126,13 @@ const UserInterface: React.FC<UserInterfaceProps> = ({ backendName }) => {
                 {users.map((user) => (
                     <div key={user.id} className={`flex items-center justify-between ${buttonColors} shadow-neo w-64 rounded-2xl hover:shadow-inner-neo`}>
                         <CardComponent card={user} />
-                        <Link href={`/home/${user.id}`}>
-                            <div className={`${bgColor} p-2 mx-4 w-12 rounded-2xl shadow-neo text-gray-400 hover:shadow-inner-neo`}>Get</div>
+                        <Link href={`/home/${user.id}`} passHref>
+                            <div 
+                                onClick={() => router.push({pathname: '/home/[id]', query: {id: user.id, backendName: backendName}}, `/home/${user.id}`)}
+                                className={`${bgColor} p-2 mx-4 w-12 rounded-2xl shadow-neo text-gray-400 hover:shadow-inner-neo`}
+                            >
+                                Get
+                            </div>
                         </Link>
                         
                         {/* <button onClick={() => deleteUser(user.id)} className={`w-24 h-16 mr-2 shadow-md bg-[#E5E5E3] rounded-2xl text-white hover:text-gray-300`}>Delete</button> */}
