@@ -44,6 +44,7 @@ const UserInterface: React.FC<UserInterfaceProps> = ({ backendName }) => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(`${apiUrl}/api/${backendName}/users`);
+                console.log(response);
                 setUsers(response.data.reverse());
             } catch (error) {
                 console.error('Error Fetching Data: ', error);
@@ -128,7 +129,7 @@ const UserInterface: React.FC<UserInterfaceProps> = ({ backendName }) => {
                         <CardComponent card={user} />
                         <Link href={`/home/${user.id}`} passHref>
                             <div 
-                                onClick={() => router.push({pathname: '/home/[id]', query: {id: user.id, backendName: backendName}}, `/home/${user.id}`)}
+                                onClick={() => router.push({pathname: '/home/[id]', query: {id: user.id, userData: JSON.stringify(user), backendName: backendName, apiUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'}}, `/home/${user.id}`)}
                                 className={`${bgColor} p-2 mx-4 w-12 rounded-2xl shadow-neo text-gray-400 hover:shadow-inner-neo`}
                             >
                                 Get
