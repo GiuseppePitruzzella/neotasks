@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import CardComponent from '../components/CardComponent';
+import UserCard from '../components/UserCard';
 
 interface User {
     id: number;
@@ -51,12 +52,9 @@ const Home = () => {
     
 
     return (
-        <div>
-            <div className="p-2">
-                <h1 className="text-base font-sm leading-7 tracking-tight text-gray-800">{user.name}</h1>
-                <p className="text-sm font-sm leading-6 text-gray-500">{user.job}</p>
-            </div>
-            <div>
+        <div className='p-12'>
+            <UserCard card={user} />
+            <div className='py-12'>
                 {projects.map((project) => (
                     <div key={project.id} className={`flex items-center justify-between ${buttonColors} shadow-neo w-64 rounded-2xl hover:shadow-inner-neo`}>
                         <h1 className="text-base font-sm leading-7 tracking-tight text-gray-800">{project.name}</h1>
