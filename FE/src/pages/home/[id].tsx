@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import CardComponent from '../components/CardComponent';
 import UserCard from '../components/UserCard';
+import Pie from '../components/Pie';
 
 interface User {
     id: number;
@@ -52,13 +53,17 @@ const Home = () => {
     
 
     return (
-        <div className='p-12'>
+        <div className='px-14 py-12'>
             <UserCard card={user} />
-            <div className='py-12'>
+            <Pie />
+            <div>
                 {projects.map((project) => (
-                    <div key={project.id} className={`flex items-center justify-between ${buttonColors} shadow-neo w-64 rounded-2xl hover:shadow-inner-neo`}>
-                        <h1 className="text-base font-sm leading-7 tracking-tight text-gray-800">{project.name}</h1>
-                        <p className="text-sm font-sm leading-6 text-gray-500">{project.description}</p>
+                    <div key={project.id} className={`flex justify-between ${buttonColors} shadow-neo w-64 h-64 rounded-2xl text-[#585E71] hover:shadow-inner-neo`}>
+                        <div className='p-4'>
+                            <div className="text-4xl font-semibold leading-12">{project.name}</div>
+                            <div className="py-2 w-42 text-sm font-sm leading-6 text-gray-500">{project.description}</div>
+                        </div>
+                        
                     </div>
                 ))}
             </div>
