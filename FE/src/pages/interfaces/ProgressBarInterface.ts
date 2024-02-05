@@ -3,4 +3,5 @@ export interface ProgressBar {
     inProgressTask: number;
     doneTask: number;
     totalTask: number;
+    totalProject: number;
 }

@@ -70,6 +70,7 @@ const Home = () => {
         inProgressTask: tasks.filter((task) => task.type === 2).length,
         doneTask: tasks.filter((task) => task.type === 3).length,
         totalTask: tasks.length,
+        totalProject: projects.length,
     };
 
     return (
@@ -96,27 +97,6 @@ const Home = () => {
                     </div>
                 ))}
             </div>
-            {/* All tasks
-            <div className="flex">
-                {tasks.map((task) => (
-                    <div
-                        key={task.id}
-                        className={`flex ${buttonColors} shadow-neo w-64 h-64 mb-4 mx-4 rounded-2xl text-[#585E71] hover:shadow-inner-neo`}
-                    >
-                        <div className="p-4">
-                            <div className="text-4xl font-semibold leading-12">
-                                {task.name}
-                            </div>
-                            <div className="py-2 w-42 text-sm font-sm leading-6 text-gray-500">
-                                {task.description}
-                            </div>
-                            <div className="py-2 w-42 text-sm font-sm leading-6 text-gray-500">
-                                {task.type}
-                            </div>
-                        </div>
-                    </div>
-                ))}
-            </div> */}
         </div>
     );
 };
