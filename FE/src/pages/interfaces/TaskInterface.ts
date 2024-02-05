@@ -1,4 +1,4 @@
-export interface Project {
+export interface Task {
     id: number;
     id_project: number;
     name: string;
