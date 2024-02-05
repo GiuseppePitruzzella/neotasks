@@ -5,19 +5,8 @@ import CardComponent from '../components/CardComponent';
 import UserCard from '../components/UserCard';
 import Pie from '../components/Pie';
 
-interface User {
-    id: number;
-    name: string;
-    email: string;
-    job: string;
-}
-
-interface Project {
-    id: number;
-    id_user: number;
-    name: string;
-    description: string;
-}
+import { User } from '../interfaces/UserInterface';
+import { Project } from '../interfaces/ProjectInterface';
 
 const Home = () => {
     const router = useRouter();
@@ -53,17 +42,16 @@ const Home = () => {
     
 
     return (
-        <div className='px-14 py-12'>
+        <div className='px-12 py-12'>
             <UserCard card={user} />
             <Pie />
-            <div>
+            <div className='flex'>
                 {projects.map((project) => (
-                    <div key={project.id} className={`flex justify-between ${buttonColors} shadow-neo w-64 h-64 rounded-2xl text-[#585E71] hover:shadow-inner-neo`}>
+                    <div key={project.id} className={`flex ${buttonColors} shadow-neo w-64 h-64 mb-4 mx-4 rounded-2xl text-[#585E71] hover:shadow-inner-neo`}>
                         <div className='p-4'>
                             <div className="text-4xl font-semibold leading-12">{project.name}</div>
                             <div className="py-2 w-42 text-sm font-sm leading-6 text-gray-500">{project.description}</div>
                         </div>
-                        
                     </div>
                 ))}
             </div>
